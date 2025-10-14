@@ -1,12 +1,16 @@
 import sys
-import logging
-from src.logger import logging  # if you're using your logger setup
+import os
 
-def error_message_detail(error, error_detail: sys):
-    _, _, exc_tb = error_detail.exc_info()
-    file_name = exc_tb.tb_frame.f_code.co_filename
-    line_number = exc_tb.tb_lineno
-    error_message = f"Error occurred in script: [{file_name}] at line number: [{line_number}] error message: [{str(error)}]"
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from src.logger import logging
+
+
+def error_message_detail(error,error_detail:sys):
+    _,_,exc_tb=error_detail.exc_info()
+    file_name=exc_tb.tb_frame.f_code.co_filename
+    error_message="Error occured in python script name [{0}] line number [{1}] error message[{2}]".format(
+     file_name,exc_tb.tb_lineno,str(error))
+
     return error_message
 
 
